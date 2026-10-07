@@ -111,7 +111,7 @@ openclaw-wa-pair --profile user2 --account default --recover
 openclaw-wa-pair --account default --relink --device-name "AI Bot"
 ```
 
-该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；默认配对用的浏览器标识保持 `Google Chrome (openclaw)`，OpenClaw 安装目录不变。已在测试账号真机验证：`AI Bot` 配对成功，手机显示 `Google Chrome (**AI Bot**)`，Gateway 接管后健康。要改名必须同时使用 `--relink`，并先在手机移除旧关联设备。手机端准确标签包含 Chrome 前缀；重连或 Gateway 重启后的持久性仍待验证。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。
+该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；默认配对用的浏览器标识保持 `Google Chrome (openclaw)`，OpenClaw 安装目录不变。已在测试账号真机验证：`AI Bot` 配对成功，手机显示 `Google Chrome (AI Bot)`，Gateway 接管后健康。要改名必须同时使用 `--relink`，并先在手机移除旧关联设备。手机端准确标签包含 Chrome 前缀；重连或 Gateway 重启后的持久性仍待验证。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。
 
 见 [设备名称验证](docs/device-name.md)。已绑定设备不能原地改名。
 
