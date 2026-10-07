@@ -45,7 +45,7 @@ npm install -g ./wa-pairing-helper-0.1.0.tgz
 
 ```bash
 openclaw-wa-pair --account default --check
-openclaw-wa-pair --profile lmtax --account sales --check
+openclaw-wa-pair --profile user2 --account default --check
 ```
 
 默认实例不填写 `--profile`；`--account default` 指默认 WhatsApp 账号，这两个“默认”互相独立。
@@ -53,10 +53,10 @@ openclaw-wa-pair --profile lmtax --account sales --check
 ```bash
 # 交互输入含国家码的手机号
 openclaw-wa-pair --account default
-openclaw-wa-pair --profile lmtax --account sales
+openclaw-wa-pair --profile user2 --account default
 
 # 也可显式传入，注意号码会进入 shell 历史和进程参数
-openclaw-wa-pair --profile lmtax --account sales --phone 60123456789
+openclaw-wa-pair --profile user2 --account default --phone 60123456789
 
 # OpenClaw 不在 PATH，或需要选择特定安装
 openclaw-wa-pair --openclaw-bin /path/to/openclaw --account default
@@ -72,8 +72,7 @@ openclaw-wa-pair --openclaw-bin /path/to/openclaw --account default
 
 ```text
 ~/.openclaw/credentials/whatsapp/default/
-~/.openclaw-lmtax/credentials/whatsapp/sales/
-~/.openclaw-company2/credentials/whatsapp/sales/
+~/.openclaw-user2/credentials/whatsapp/default/
 ```
 
 目录由目标安装的 OpenClaw 和 WhatsApp 插件解析，尊重有效配置、`$include`、环境路径覆盖和已有 `authDir`。Helper 不改配置、不改 binding、不建立公共凭据目录。旧版共享凭据目录、符号链接凭据路径和混入非认证文件的目录会被拒绝。
@@ -83,8 +82,8 @@ openclaw-wa-pair --openclaw-bin /path/to/openclaw --account default
 ## 重新绑定与恢复
 
 ```bash
-openclaw-wa-pair --profile lmtax --account sales --relink
-openclaw-wa-pair --profile lmtax --account sales --recover
+openclaw-wa-pair --profile user2 --account default --relink
+openclaw-wa-pair --profile user2 --account default --recover
 ```
 
 `--relink` 在独占锁下备份完整认证文件，再尝试新配对。失败时恢复本地备份及原运行状态；成功但 OpenClaw 接管失败时保留新凭据，`--recover` 只重试接管。
