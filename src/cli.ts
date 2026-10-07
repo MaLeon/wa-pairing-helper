@@ -18,7 +18,7 @@ async function main(): Promise<void> {
   if (options.deviceName) await enableDeviceNamePatch();
   const gateway = await connectOpenClaw(options);
   const t = gateway.target;
-  stdout.write(`wa-pairing-helper 0.1.0\nOpenClaw: ${t.binary}\n版本: ${t.coreVersion} / WhatsApp ${t.pluginVersion} / Baileys ${t.baileysVersion}\nProfile: ${t.profile}\n账号: ${t.account}\n配置: ${t.configPath}\nGateway: ${t.gatewayUrl}\n凭据目录: ${t.authDir}\n兼容状态: 2026.7.1-2 固定基线，尚未完成真机验收\n`);
+  stdout.write(`wa-pairing-helper 0.1.0\nOpenClaw: ${t.binary}\n版本: ${t.coreVersion} / WhatsApp ${t.pluginVersion} / Baileys ${t.baileysVersion}\nProfile: ${t.profile}\n账号: ${t.account}\n配置: ${t.configPath}\nGateway: ${t.gatewayUrl}\n凭据目录: ${t.authDir}\n兼容状态: Ubuntu 24.04 默认账号配对与接管已真机验证；其他验收见项目文档\n`);
   if (options.deviceName) stdout.write(`设备显示名称（实验性）: ${options.deviceName}\n`);
   const files = await authFiles(t.authDir); const pending = await readJournal(operationDir(t), t);
   if (options.check) { stdout.write(`凭据文件: ${files.length}\n待恢复操作: ${pending ? '有' : '无'}\n只读预检完成。\n`); return; }

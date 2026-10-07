@@ -15,7 +15,7 @@ export const HELP = `openclaw-wa-pair --account <id> [选项]
 仅支持 Linux 本机、同一系统用户及已配置启用的账号。
 仅适配 OpenClaw 2026.7.1-2、官方 WhatsApp 2026.7.1 与 Baileys 7.0.0-rc13。
 通过 Gateway 账号级 stop/start 完成交接；不支持其他进程同时操作目标凭据目录。
-真实服务器和手机配对仍待验收。
+Ubuntu 24.04 默认账号已完成真机配对与接管；其他验收项见项目文档。
 `;
 export function parseOptions(args: string[]): Options | null {
   const { values: v } = parseArgs({ args, strict: true, allowPositionals: false, options: {

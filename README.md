@@ -2,7 +2,7 @@
 
 独立的 WhatsApp 手机号关联码登录工具。安装后提供 `openclaw-wa-pair` 命令；正常消息收发仍由 OpenClaw 官方 WhatsApp 插件负责。
 
-**当前为 0.1.0 候选实现，尚未进行真实 WhatsApp 手机配对验收。** 已实现默认实例、多 profile、Gateway 单账号暂停交接、Helper 互斥、配对状态机、备份回滚与异常恢复。自定义设备名称明确禁用，实验补丁单独提供。
+**0.1.0 已在 Ubuntu 测试服务器完成真实手机号关联码配对和 OpenClaw 接管。** 自定义名称实验功能也已配对成功，手机显示为 `Google Chrome (AI Bot)`。Gateway 状态探测为 `connected / health: healthy`。Gateway 重启后名称持久性、消息收发/路由及命名 profile 尚未完成真机验收；具体步骤见 [服务器操作手册](docs/runbook.md)。
 
 ## 环境与兼容范围
 
@@ -112,7 +112,7 @@ openclaw-wa-pair --profile lmtax --account sales --recover
 openclaw-wa-pair --account default --relink --device-name "AI Bot"
 ```
 
-该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；配对用的浏览器标识保持 `Chrome (Ubuntu)`，OpenClaw 安装目录不变。指定设备名称必须同时使用 `--relink`；请先在手机移除旧的关联设备。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。手机显示和后续重连持久性尚待真实设备验收。
+该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；配对用的浏览器标识保持 `Chrome (Ubuntu)`，OpenClaw 安装目录不变。已在测试账号真机验证：`AI Bot` 配对成功，手机显示 `Google Chrome (AI Bot)`，Gateway 接管后健康。要改名必须同时使用 `--relink`，并先在手机移除旧关联设备。手机端准确标签包含 Chrome 前缀；重连或 Gateway 重启后的持久性仍待验证。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。
 
 见 [设备名称验证](docs/device-name.md)。已绑定设备不能原地改名。
 
