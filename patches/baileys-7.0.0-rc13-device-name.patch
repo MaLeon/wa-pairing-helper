@@ -1,0 +1,5 @@
+--- a/lib/Utils/validate-connection.js
++++ b/lib/Utils/validate-connection.js
+@@ -84,1 +84,1 @@
+-        os: config.browser[0],
++        os: config.helperDeviceName ?? config.browser[0],
