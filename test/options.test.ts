@@ -13,11 +13,14 @@ test('account is explicit; default instance is distinct from default account', (
 test('invalid modes and inherited profile fail closed', () => {
   assert.throws(() => parseOptions(['--account', 'sales', '--check', '--relink']));
   assert.throws(() => parseOptions(['--account', 'sales', '--recover', '--phone', '12345678']));
-  assert.throws(() => parseOptions(['--account', 'sales', '--device-name', 'AI Bot']));
   assert.throws(() => parseOptions(['--account', 'sales', '--device-name', 'AI Bot', '--relink', '--check']));
+  assert.throws(() => parseOptions(['--account', 'sales', '--device-name', 'AI Bot', '--check']));
   assert.throws(() => parseOptions(['--account', 'sales', '--device-name', '   ', '--relink']));
   assert.throws(() => parseOptions(['--account', 'sales', '--device-name', 'A\nBot', '--relink']));
   assert.equal(parseOptions(['--account', 'sales', '--device-name', 'AI Bot', '--relink'])?.deviceName, 'AI Bot');
+  assert.deepEqual(parseOptions(['--profile', 'user2', '--account', 'default', '--phone', '60123456789', '--device-name', 'AI Bot']), {
+    account: 'default', profile: 'user2', phone: '60123456789', deviceName: 'AI Bot', binary: undefined, check: false, relink: false, recover: false,
+  });
   assert.throws(() => assertDefaultProfile(parseOptions(['--account', 'sales'])!, { OPENCLAW_PROFILE: 'other' }));
   assert.doesNotThrow(() => assertDefaultProfile(parseOptions(['--account', 'sales', '--profile', 'work'])!, { OPENCLAW_PROFILE: 'other' }));
 });

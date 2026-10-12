@@ -34,9 +34,17 @@ openclaw-wa-pair --account default
 
 收到关联码后，在手机打开 **WhatsApp → 已关联设备 → 关联设备 → 改用电话号码关联**，输入终端中的代码。不要把关联码写进脚本、shell 命令或日志。等待终端依次报告“配对完成，凭据已保存”和“OpenClaw 接管完成”。
 
+首次绑定时也可以同时设置设备名称，目标凭据目录必须为空：
+
+```bash
+openclaw-wa-pair --profile user2 --account default --phone 60123456789 --device-name "AI Bot"
+```
+
+示例手机号会出现在 shell 历史和进程参数中；更安全的做法是省略 `--phone`，在 Helper 交互提示中输入。
+
 ## 重新绑定或设置设备显示名称
 
-1. 先在手机的“已关联设备”中移除旧的 OpenClaw 设备。
+1. 如果是改名或重新绑定，先在手机的“已关联设备”中移除旧的 OpenClaw 设备。首次绑定且凭据目录为空时无需 `--relink`。
 2. 用只读 `--check` 再核对账号和凭据目录。
 3. 交互运行：
 

@@ -9,7 +9,7 @@ export const HELP = `openclaw-wa-pair --account <id> [选项]
   --check               只读预检，不请求关联码、不暂停账号
   --relink              备份原凭据并重新绑定
   --recover             恢复该账号未完成的操作
-  --device-name <name>   重新绑定时设置实验性设备显示名称（需 --relink）
+  --device-name <name>   首次绑定或 --relink 时设置实验性设备显示名称
   --help                帮助
 
 仅支持 Linux 本机、同一系统用户及已配置启用的账号。
@@ -29,7 +29,7 @@ export function parseOptions(args: string[]): Options | null {
   if (v.profile !== undefined) requireThat(/^[a-zA-Z0-9_-]+$/.test(v.profile), 'PROFILE_INVALID', 'profile 名称无效。');
   requireThat([v.check, v.relink, v.recover].filter(Boolean).length <= 1, 'MODE_CONFLICT', '--check、--relink、--recover 不能同时使用。');
   requireThat(!(v.recover && (v.phone || v['device-name'])), 'MODE_CONFLICT', '--recover 不接受手机号或设备名称。');
-  requireThat(!(v['device-name'] && (!v.relink || v.check)), 'MODE_CONFLICT', '--device-name 仅能与 --relink 一起用于实际重新绑定。');
+  requireThat(!(v['device-name'] && v.check), 'MODE_CONFLICT', '--check 只读预检不接受 --device-name。');
   if (v['device-name'] !== undefined) {
     const name = v['device-name'].trim();
     requireThat(name.length > 0 && [...name].length <= 32 && !/[\u0000-\u001f\u007f-\u009f]/u.test(name), 'DEVICE_NAME_INVALID', '设备名称须为 1–32 个字符，且不能包含控制字符。');

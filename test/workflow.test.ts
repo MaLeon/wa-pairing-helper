@@ -12,7 +12,7 @@ const opts = () => ({ relink: false, recover: false, phone: '60123456789', signa
 const success: Pair = async ({ authDir, assertOwned }) => { await assertOwned(); await atomicWrite(path.join(authDir, 'creds.json'), '{"registered":true}', assertOwned); };
 test('fresh pairing hands off after releasing auth lock and preserves config', async t => {
   const f = await fixture(); t.after(f.cleanup);
-  await runWorkflow(f.gateway, async args => { assert.equal((await f.gateway.status()).running, false); assert.ok(f.locks.has(f.target.authDir)); await success(args); f.calls.push('pair-closed'); }, opts());
+  await runWorkflow(f.gateway, async args => { assert.equal(args.deviceName, 'AI Bot'); assert.equal((await f.gateway.status()).running, false); assert.ok(f.locks.has(f.target.authDir)); await success(args); f.calls.push('pair-closed'); }, { ...opts(), deviceName: 'AI Bot' });
   assert.ok(f.calls.indexOf('pair-closed') < f.calls.indexOf(`unlock:${f.target.authDir}`));
   assert.ok(f.calls.indexOf(`unlock:${f.target.authDir}`) < f.calls.indexOf('start:sales'));
   assert.equal((await f.gateway.status()).connected, true);

@@ -55,6 +55,9 @@ openclaw-wa-pair --profile user2 --account default --check
 openclaw-wa-pair --account default
 openclaw-wa-pair --profile user2 --account default
 
+# 首次绑定时设置设备名称（目标凭据目录必须为空）
+openclaw-wa-pair --profile user2 --account default --phone 60123456789 --device-name "AI Bot"
+
 # 也可显式传入，注意号码会进入 shell 历史和进程参数
 openclaw-wa-pair --profile user2 --account default --phone 60123456789
 
@@ -105,13 +108,19 @@ openclaw-wa-pair --profile user2 --account default --recover
 
 ## 设备名称
 
-可在显式重新绑定时尝试设置设备名称：
+首次绑定可以直接设置设备名称，前提是目标凭据目录为空：
+
+```bash
+openclaw-wa-pair --profile user2 --account default --phone 60123456789 --device-name "AI Bot"
+```
+
+若账号已有本地凭据，则必须先在手机移除旧设备，再使用 `--relink`：
 
 ```bash
 openclaw-wa-pair --account default --relink --device-name "AI Bot"
 ```
 
-该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；默认配对用的浏览器标识保持 `Google Chrome (openclaw)`，OpenClaw 安装目录不变。已在测试账号真机验证：`AI Bot` 配对成功，手机显示 `Google Chrome (AI Bot)`，Gateway 接管后健康。要改名必须同时使用 `--relink`，并先在手机移除旧关联设备。手机端准确标签包含 Chrome 前缀；重连或 Gateway 重启后的持久性仍待验证。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。
+该功能仍为实验性：Helper 只在用户显式传入 `--device-name` 时，按精确文件哈希修改自己安装的 Baileys `DeviceProps.os`；配对用的浏览器标识保持不变，OpenClaw 安装目录不变。首次绑定且没有旧凭据时无需 `--relink`；已有凭据时必须显式 `--relink`，以备份并替换现有登录。已在测试账号真机验证：`AI Bot` 配对成功，手机显示 `Google Chrome (AI Bot)`，Gateway 接管后健康。手机端标签包含 Chrome 前缀；重连或 Gateway 重启后的持久性仍待验证。若 Baileys 文件与固定补丁基线不符，命令会在暂停账号或操作凭据前退出。
 
 见 [设备名称验证](docs/device-name.md)。已绑定设备不能原地改名。
 
