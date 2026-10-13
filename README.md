@@ -9,7 +9,7 @@
 | 项目 | 当前范围 |
 |---|---|
 | 操作系统 | Linux，本机直接安装，与 Gateway 使用同一用户 |
-| Node.js | 24.16.0 及以上的 24.x |
+| Node.js | 24.16.0+（24.x）或 26.1.0+ |
 | OpenClaw（可执行配对） | 精确版本 2026.7.1-2 |
 | 官方 WhatsApp 插件 | 精确版本 2026.7.1 |
 | Baileys | 精确版本 7.0.0-rc13 |
@@ -34,7 +34,7 @@ npm run check
 npm test
 npm run build
 npm pack
-npm install -g ./wa-pairing-helper-0.1.0.tgz
+npm install -g ./wa-pairing-helper-0.1.1.tgz
 ```
 
 代码尚未推送时，可将本地生成的 `.tgz` 复制到 Linux 主机后执行最后一条安装命令。项目目前没有发布到 npm registry。不要使用 `sudo` 切换用户运行配对，除非你的 OpenClaw 本身就属于 root。

@@ -2,6 +2,8 @@
 
 2026-10-07：0.1.0 在 Ubuntu 测试服务器完成真实关联码配对与 OpenClaw 接管，实测版本为 OpenClaw 2026.7.1-2、官方 WhatsApp 2026.7.1、Baileys 7.0.0-rc13、Node.js 24.21.0。自定义名称 `AI Bot` 的设备显示为 `Google Chrome (AI Bot)`。这验证了本次账号配对/接管，不等于生产稳定性，也未验证 Gateway 重启后的名称持久性。
 
+Helper 的 Node.js 运行时门槛现接受 `24.16+` 或 `26.1+`。OpenClaw 2026.7.1-2 的 `package.json` 允许 Node `>=25.9.0`，Baileys 7.0.0-rc13 要求 Node 20+；但本项目完整配对/接管流程目前只在 Node 24.21.0 上真机验证。Node 26 主机仍需执行 `--check`，并在测试账号上完成配对与接管验收后，才能视为该环境已验证。
+
 | 检查 | 状态 |
 |---|---|
 | TypeScript 构建与类型检查 | 已验证 |

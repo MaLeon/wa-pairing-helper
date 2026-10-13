@@ -7,11 +7,11 @@ import { connectOpenClaw } from './openclaw.js';
 import { enableDeviceNamePatch } from './device-name.js';
 import { runWorkflow, operationDir, readJournal } from './workflow.js';
 import { authFiles } from './files.js';
+import { isSupportedNodeVersion } from './runtime.js';
 
 async function main(): Promise<void> {
   process.umask(0o077);
-  const [major, minor] = process.versions.node.split('.').map(Number);
-  requireThat(major === 24 && minor! >= 16, 'NODE_VERSION', '请使用 Node.js 24.16 或更新的 24.x 版本。');
+  requireThat(isSupportedNodeVersion(process.versions.node), 'NODE_VERSION', '请使用 Node.js 24.16+（24.x）或 26.1+。');
   let options;
   try { options = parseOptions(process.argv.slice(2)); } catch (error) { if (error instanceof HelperError) throw error; throw new HelperError('ARGUMENTS', '命令参数无效，请查看 --help。'); }
   if (!options) { stdout.write(HELP); return; }

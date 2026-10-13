@@ -1,6 +1,6 @@
 {
   "name": "wa-pairing-helper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Account-scoped WhatsApp pairing-code helper for OpenClaw",
   "type": "module",
   "private": true,
@@ -16,7 +16,7 @@
     "scripts"
   ],
   "engines": {
-    "node": ">=24.16.0 <25"
+    "node": ">=24.16.0 <25 || >=26.1.0"
   },
   "repository": {
     "type": "git",
